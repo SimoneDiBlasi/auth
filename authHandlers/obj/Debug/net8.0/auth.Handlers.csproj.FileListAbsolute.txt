@@ -1,0 +1,6 @@
+C:\SimoneRepo\auth\authHandlers\obj\Debug\net8.0\auth.Handlers.csproj.AssemblyReference.cache
+C:\SimoneRepo\auth\authHandlers\obj\Debug\net8.0\auth.Handlers.GeneratedMSBuildEditorConfig.editorconfig
+C:\SimoneRepo\auth\authHandlers\obj\Debug\net8.0\auth.Handlers.AssemblyInfoInputs.cache
+C:\SimoneRepo\auth\authHandlers\obj\Debug\net8.0\auth.Handlers.AssemblyInfo.cs
+C:\SimoneRepo\auth\authHandlers\obj\Debug\net8.0\auth.Handlers.csproj.CoreCompileInputs.cache
+C:\SimoneRepo\auth\authHandlers\obj\Debug\net8.0\auth.Handlers.sourcelink.json

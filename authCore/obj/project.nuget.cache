@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Wr2jyhxfHcoNgsjveUJjQbRyhkh1eT8Jxlr5xrNy5/jSvOjw8395DR1g7f7xjULOwWWBxkk6h89ohbfpBvUuug==",
+  "dgSpecHash": "byaPboHnP9Kt8W+4jZPkW8ny7liGu9Y9xcY8+S1NdbzzA7MbT+MmjyyDxjOmEHsg9h0nX1uYc6vAkF2um3InbQ==",
   "success": true,
   "projectFilePath": "C:\\SimoneRepo\\auth\\authCore\\auth.Core.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.http.features\\2.1.1\\microsoft.aspnetcore.http.features.2.1.1.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.extensions.primitives\\2.1.1\\microsoft.extensions.primitives.2.1.1.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.memory\\4.5.1\\system.memory.4.5.1.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime.compilerservices.unsafe\\4.5.1\\system.runtime.compilerservices.unsafe.4.5.1.nupkg.sha512"
+  ],
   "logs": []
 }
