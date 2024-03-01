@@ -6,6 +6,7 @@ namespace auth.Core.Models.Cookie
     {
         public required string EncryptedValue { get; set; }
         public required CookieOptions CookieOptions { get; set; }
+        gfdhfgh
 
     }
 }
