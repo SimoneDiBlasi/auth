@@ -23,6 +23,7 @@ builder.Services.AddAuthentication("MyCookieAuth").AddCookie("MyCookieAuth", opt
 
 builder.Services.AddAuthorization(options =>
 {
+    options.AddPolicy("Admin", policy => policy.RequireClaim("Admin"));
     options.AddPolicy("SeniorDeveloperPolicy", policy =>
         policy.Requirements.Add(new SeniorRequirement { ExperienceYear = 5 }));
 });

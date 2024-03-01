@@ -51,3 +51,11 @@ C:\SimoneRepo\auth\authAPI\obj\Debug\net8.0\scopedcss\bundle\auth.API.styles.css
 C:\SimoneRepo\auth\authAPI\obj\Debug\net8.0\auth.API.csproj.CopyComplete
 C:\SimoneRepo\auth\authAPI\obj\Debug\net8.0\auth.API.genruntimeconfig.cache
 C:\SimoneRepo\auth\authAPI\obj\Debug\net8.0\ref\auth.API.dll
+C:\SimoneRepo\auth\authAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\SimoneRepo\auth\authAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\SimoneRepo\auth\authAPI\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\SimoneRepo\auth\authAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\SimoneRepo\auth\authAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\SimoneRepo\auth\authAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\SimoneRepo\auth\authAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\SimoneRepo\auth\authAPI\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll

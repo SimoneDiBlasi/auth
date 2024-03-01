@@ -1,7 +1,12 @@
 ﻿using auth.Core.Interfaces;
+using auth.Core.Models.Login;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 
 namespace auth.Handlers.Login
 {
@@ -9,11 +14,15 @@ namespace auth.Handlers.Login
     {
 
         private readonly IHttpContextAccessor context;
+        public readonly IConfiguration configuration;
 
-        public AuthenticationHandlers(IHttpContextAccessor context)
+        public AuthenticationHandlers(IHttpContextAccessor context, IConfiguration configuration)
         {
             this.context = context;
+            this.configuration = configuration;
         }
+
+
 
         public async Task<bool> SetCookieAuthenticationHandler(string username, string password)
         {
@@ -21,17 +30,45 @@ namespace auth.Handlers.Login
             if (username == "admin" && password == "password")
             {
                 // Se l'autenticazione ha successo, crea i claim per l'utente
-                var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, username),
-                new Claim("admin", "true"), // Aggiungi il claim 'admin' per l'utente admin
+                var claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, username),
+                new Claim("Admin", "true"), // Aggiungi il claim 'admin' per l'utente admin
                 new Claim("DeveloperExperienceYear","6")
                 // Altri claim se necessario
-            };
+                };
                 await CreateSessionCookie(claims);
                 return true;
             }
+
             return false;
+
+        }
+
+        public async Task<Token?> SetTokenAuthenticationHandler(Credential credential)
+        {
+            if (credential.Username == "admin" && credential.Password == "password")
+            {
+                // Se l'autenticazione ha successo, crea i claim per l'utente
+                var claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, credential.Username),
+                new Claim("Admin", "true"), // Aggiungi il claim 'admin' per l'utente admin
+                new Claim("DeveloperExperienceYear","6")
+                // Altri claim se necessario
+                };
+
+                var expiresAt = DateTime.UtcNow.AddMinutes(10);
+                var token = new Token()
+                {
+                    AccessToken = CreateToken(claims, expiresAt),
+                    ExpiresAt = expiresAt,
+                };
+
+                return token;
+            }
+
+            return null;
 
         }
 
@@ -49,6 +86,21 @@ namespace auth.Handlers.Login
                 IsPersistent = false, // Cookie non persistente
                 AllowRefresh = false, // Non consentire il refresh del cookie
             });
+        }
+
+        private string CreateToken(IEnumerable<Claim> claims, DateTime expireAt)
+        {
+            var secretKey = Encoding.ASCII.GetBytes(configuration.GetValue<string>("SecretKey") ?? "");
+            var jwt = new JwtSecurityToken(
+                claims: claims,
+                notBefore: DateTime.UtcNow,
+                expires: expireAt,
+                signingCredentials: new SigningCredentials(
+                    new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature
+                    ));
+
+
+            return new JwtSecurityTokenHandler().WriteToken(jwt);
         }
     }
 }

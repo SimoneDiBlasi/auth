@@ -1,11 +1,12 @@
 using auth.Core.Interfaces;
+using auth.Core.Models.Login;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace auth.API.Controllers
 {
     [ApiController]
-    [Route("api/logout")]
+    [Route("api/login")]
     public class LoginController : ControllerBase
     {
 
@@ -21,7 +22,16 @@ namespace auth.API.Controllers
         public IActionResult SetCookieAuthenticationHandler(string username, string password)
         {
             var results = login.SetCookieAuthenticationHandler(username, password);
-            return Ok(results);
+            return results != null ? Ok(results) : Unauthorized();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("by-token")]
+        public IActionResult SetTokenAuthenticationHandler([FromBody] Credential credential)
+        {
+            var token = login.SetTokenAuthenticationHandler(credential);
+            return Ok(token);
         }
 
 
