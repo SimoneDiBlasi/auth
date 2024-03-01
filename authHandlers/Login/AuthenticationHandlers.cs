@@ -25,7 +25,7 @@ namespace auth.Handlers.Login
             {
                 new Claim(ClaimTypes.Name, username),
                 new Claim("admin", "true"), // Aggiungi il claim 'admin' per l'utente admin
-                new Claim("DeveloperExperienceYear","4")
+                new Claim("DeveloperExperienceYear","6")
                 // Altri claim se necessario
             };
                 await CreateSessionCookie(claims);
