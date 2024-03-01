@@ -21,8 +21,6 @@ namespace auth.API.Controllers
         public IActionResult SetCookieAuthenticationHandler(string username, string password)
         {
             var results = login.SetCookieAuthenticationHandler(username, password);
-
-            //Response.Cookies.Append()
             return Ok(results);
         }
 
