@@ -23,18 +23,18 @@ namespace auth.Handlers.Model
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.HasDefaultSchema("dbo");
+            //sovrascrivo il comportamento di identity. Questo per evitare conflitti e tabella duplicate con tipi diversi
+            // N.B il tipo di deafault per la chiave è string, quindi qual'ora di voglia cambiare il tipo bisogna ignorare le tabelle identity come chiave stringa nella migrazione
+            modelBuilder.HasDefaultSchema("auth");
 
             // Change table names
             modelBuilder.Entity<IdentityUser>().ToTable("Users");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
-            modelBuilder.Entity<IdentityUserRole<int>>().ToTable("UserRoles").HasKey(val => new { val.RoleId, val.UserId });
-            modelBuilder.Entity<IdentityUserClaim<int>>().ToTable("UserClaims");
-            modelBuilder.Entity<IdentityUserLogin<int>>().ToTable("UserLogins").HasKey(val => val.UserId);
-            modelBuilder.Entity<IdentityUserToken<int>>().ToTable("UserTokens").HasKey(val => val.UserId);
-            modelBuilder.Entity<IdentityRoleClaim<int>>().ToTable("RoleClaims").HasKey(val => val.RoleId);
-
-
+            modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
+            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+            modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+            modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
+            modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
         }
 
     }
