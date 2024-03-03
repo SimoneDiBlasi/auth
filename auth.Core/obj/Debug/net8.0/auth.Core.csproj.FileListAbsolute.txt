@@ -1,0 +1,13 @@
+C:\SimoneRepo\auth\auth.Core\bin\Debug\net8.0\auth.Core.deps.json
+C:\SimoneRepo\auth\auth.Core\bin\Debug\net8.0\auth.Core.dll
+C:\SimoneRepo\auth\auth.Core\bin\Debug\net8.0\auth.Core.pdb
+C:\SimoneRepo\auth\auth.Core\obj\Debug\net8.0\auth.Core.csproj.AssemblyReference.cache
+C:\SimoneRepo\auth\auth.Core\obj\Debug\net8.0\auth.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\SimoneRepo\auth\auth.Core\obj\Debug\net8.0\auth.Core.AssemblyInfoInputs.cache
+C:\SimoneRepo\auth\auth.Core\obj\Debug\net8.0\auth.Core.AssemblyInfo.cs
+C:\SimoneRepo\auth\auth.Core\obj\Debug\net8.0\auth.Core.csproj.CoreCompileInputs.cache
+C:\SimoneRepo\auth\auth.Core\obj\Debug\net8.0\auth.Core.sourcelink.json
+C:\SimoneRepo\auth\auth.Core\obj\Debug\net8.0\auth.Core.dll
+C:\SimoneRepo\auth\auth.Core\obj\Debug\net8.0\refint\auth.Core.dll
+C:\SimoneRepo\auth\auth.Core\obj\Debug\net8.0\auth.Core.pdb
+C:\SimoneRepo\auth\auth.Core\obj\Debug\net8.0\ref\auth.Core.dll
