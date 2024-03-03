@@ -13,9 +13,7 @@
           "MySql.EntityFrameworkCore": "8.0.0",
           "Swashbuckle.AspNetCore": "6.5.0",
           "System.IdentityModel.Tokens.Jwt": "7.4.0",
-          "auth.API": "1.0.0",
-          "auth.Core": "1.0.0",
-          "auth.Handlers": "1.0.0"
+          "auth.API": "1.0.0"
         },
         "runtime": {
           "auth.dll": {}

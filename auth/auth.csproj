@@ -20,8 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\auth.API\auth.API.csproj" />
-    <ProjectReference Include="..\auth.Core\auth.Core.csproj" />
-    <ProjectReference Include="..\auth.Handlers\auth.Handlers.csproj" />
   </ItemGroup>
 
 </Project>

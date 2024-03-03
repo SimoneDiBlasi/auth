@@ -292,12 +292,6 @@
             "projectReferences": {
               "C:\\SimoneRepo\\auth\\auth.API\\auth.API.csproj": {
                 "projectPath": "C:\\SimoneRepo\\auth\\auth.API\\auth.API.csproj"
-              },
-              "C:\\SimoneRepo\\auth\\auth.Core\\auth.Core.csproj": {
-                "projectPath": "C:\\SimoneRepo\\auth\\auth.Core\\auth.Core.csproj"
-              },
-              "C:\\SimoneRepo\\auth\\auth.Handlers\\auth.Handlers.csproj": {
-                "projectPath": "C:\\SimoneRepo\\auth\\auth.Handlers\\auth.Handlers.csproj"
               }
             }
           }

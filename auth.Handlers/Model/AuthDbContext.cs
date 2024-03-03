@@ -8,6 +8,8 @@ namespace auth.Handlers.Model
     public class AuthDbContext : IdentityDbContext
     {
         public readonly IConfiguration configuration;
+
+
         public AuthDbContext(DbContextOptions<AuthDbContext> options, IConfiguration configuration) : base(options)
         {
             this.configuration = configuration;
