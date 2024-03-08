@@ -6,6 +6,7 @@ using auth.Handlers.Logout;
 using auth.Handlers.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -22,7 +23,7 @@ var controllerAssembly = Assembly.Load("auth.API");
 mvcBuilder.AddApplicationPart(controllerAssembly);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddDbContext<AuthDbContext>();
+builder.Services.AddDbContext<AuthDbContext>(); ; //in futuro vedere se inserendo le option con la connection string le migrazioni non rompono 
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -46,11 +47,10 @@ builder.Services.AddSwaggerGen(c =>
                             Id = "Bearer"
                         }
                     },
-                    new string[] {}
-                }
+            new string[] {}
+        }
             });
 });
-
 var secretKey = builder.Configuration.GetValue<string>("SecretKey");
 
 builder.Services.AddAuthentication(options =>
@@ -87,7 +87,21 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddScoped<ILogin, AuthenticationHandlers>();
 builder.Services.AddScoped<ILogout, LogoutHandlers>();
+builder.Services.AddScoped<ISignup, SignupHandlers>();
 builder.Services.AddScoped<IAuthorizationHandler, AuthorizationRequirementsHandler>();
+// Questo viene fatto inoltre per creare delle classi custom come la tua identity user o identity role che utilizzano la interfaccia di identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.Password.RequiredLength = 8;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Lockout.AllowedForNewUsers = true;
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+    options.User.RequireUniqueEmail = true;
+
+}).AddEntityFrameworkStores<AuthDbContext>();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 

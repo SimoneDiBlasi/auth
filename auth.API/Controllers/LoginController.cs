@@ -19,18 +19,18 @@ namespace auth.API.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("by-cookie")]
-        public IActionResult SetCookieAuthenticationHandler(string username, string password)
+        public async Task<IActionResult> SetCookieAuthenticationHandler(string username, string password)
         {
-            var results = login.SetCookieAuthenticationHandler(username, password);
-            return results != null ? Ok(results) : Unauthorized();
+            var results = await login.SetCookieAuthenticationHandler(username, password);
+            return results ? Ok(results) : Unauthorized();
         }
 
         [AllowAnonymous]
         [HttpPost]
         [Route("by-token")]
-        public IActionResult SetTokenAuthenticationHandler([FromBody] Credential credential)
+        public async Task<IActionResult> SetTokenAuthenticationHandler([FromBody] Credential credential)
         {
-            var token = login.SetTokenAuthenticationHandler(credential);
+            var token = await login.SetTokenAuthenticationHandler(credential);
             return Ok(token);
         }
 

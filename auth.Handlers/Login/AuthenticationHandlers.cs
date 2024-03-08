@@ -2,6 +2,7 @@
 using auth.Core.Models.Login;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,11 +16,15 @@ namespace auth.Handlers.Login
 
         private readonly IHttpContextAccessor context;
         public readonly IConfiguration configuration;
+        public readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public AuthenticationHandlers(IHttpContextAccessor context, IConfiguration configuration)
+        public AuthenticationHandlers(IHttpContextAccessor context, IConfiguration configuration, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
         {
             this.context = context;
             this.configuration = configuration;
+            this.signInManager = signInManager;
+            this.userManager = userManager;
         }
 
 
@@ -47,7 +52,14 @@ namespace auth.Handlers.Login
 
         public async Task<Token?> SetTokenAuthenticationHandler(Credential credential)
         {
-            if (credential.Username == "admin" && credential.Password == "password")
+
+            var user = await userManager.FindByNameAsync(credential.Username);
+            if (user == null) return new Token { AccessToken = null, ExpiresAt = null, Errors = "Failed to login" };
+            var result = await signInManager.PasswordSignInAsync(user, credential.Password, false, true);
+            if (result.IsLockedOut)
+                return new Token() { AccessToken = null, ExpiresAt = null, Errors = "User is lockout, just wait" };
+
+            if (result.Succeeded)
             {
                 // Se l'autenticazione ha successo, crea i claim per l'utente
                 var claims = new List<Claim>()
@@ -68,7 +80,7 @@ namespace auth.Handlers.Login
                 return token;
             }
 
-            return null;
+            return new Token { AccessToken = null, ExpiresAt = null, Errors = "Failed to login" }; ;
 
         }
 
