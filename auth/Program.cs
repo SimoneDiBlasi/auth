@@ -100,6 +100,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
     options.User.RequireUniqueEmail = true;
+    options.SignIn.RequireConfirmedEmail = true;
+
 
 }).AddEntityFrameworkStores<AuthDbContext>();
 builder.Services.AddHttpContextAccessor();
