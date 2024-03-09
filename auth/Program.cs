@@ -102,8 +102,10 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.User.RequireUniqueEmail = true;
     options.SignIn.RequireConfirmedEmail = true;
 
+})
+.AddEntityFrameworkStores<AuthDbContext>()
+.AddDefaultTokenProviders();
 
-}).AddEntityFrameworkStores<AuthDbContext>();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
