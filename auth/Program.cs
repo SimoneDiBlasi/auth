@@ -1,6 +1,7 @@
 using auth.Core.Interfaces;
 using auth.Core.Models.AuthorizationRequirements;
 using auth.Handlers.AuthorizationRequirements;
+using auth.Handlers.Email;
 using auth.Handlers.Login;
 using auth.Handlers.Logout;
 using auth.Handlers.Model;
@@ -88,6 +89,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddScoped<ILogin, AuthenticationHandlers>();
 builder.Services.AddScoped<ILogout, LogoutHandlers>();
 builder.Services.AddScoped<ISignup, SignupHandlers>();
+builder.Services.AddScoped<IEmail, EmailHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, AuthorizationRequirementsHandler>();
 // Questo viene fatto inoltre per creare delle classi custom come la tua identity user o identity role che utilizzano la interfaccia di identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
