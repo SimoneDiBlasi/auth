@@ -24,5 +24,14 @@ namespace auth.API.Controllers
             return isProcessed ? Ok("Logout successfull") : UnprocessableEntity();
 
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("by-token")]
+        public async Task<IActionResult> LogoutToken()
+        {
+            await logout.LogoutByToken();
+            return Ok();
+        }
     }
 }

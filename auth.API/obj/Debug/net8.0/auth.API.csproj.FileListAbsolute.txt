@@ -78,3 +78,4 @@ C:\SimoneRepo\auth\auth.API\obj\Debug\net8.0\refint\auth.API.dll
 C:\SimoneRepo\auth\auth.API\obj\Debug\net8.0\auth.API.pdb
 C:\SimoneRepo\auth\auth.API\obj\Debug\net8.0\auth.API.genruntimeconfig.cache
 C:\SimoneRepo\auth\auth.API\obj\Debug\net8.0\ref\auth.API.dll
+C:\SimoneRepo\auth\auth.API\bin\Debug\net8.0\AutoMapper.dll

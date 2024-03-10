@@ -1,15 +1,19 @@
 ﻿using auth.Core.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace auth.Handlers.Logout
 {
     public class LogoutHandlers : ILogout
     {
         private readonly IHttpContextAccessor context;
-        public LogoutHandlers(IHttpContextAccessor context)
+        private readonly SignInManager<IdentityUser> signInManager;
+
+        public LogoutHandlers(IHttpContextAccessor context, SignInManager<IdentityUser> signInManager)
         {
             this.context = context;
+            this.signInManager = signInManager;
         }
 
         public async Task<bool> LogoutByCookie()
@@ -23,6 +27,11 @@ namespace auth.Handlers.Logout
             {
                 return false;
             }
+        }
+
+        public async Task LogoutByToken()
+        {
+            await signInManager.SignOutAsync();
         }
     }
 }

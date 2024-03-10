@@ -61,8 +61,6 @@ namespace auth.Handlers.Login
 
             if (result.Succeeded)
             {
-
-
                 // Se l'autenticazione ha successo, crea i claim per l'utente
                 var claims = new List<Claim>()
                 {

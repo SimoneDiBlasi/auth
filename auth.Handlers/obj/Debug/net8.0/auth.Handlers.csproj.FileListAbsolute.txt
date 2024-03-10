@@ -137,3 +137,4 @@ C:\SimoneRepo\auth\auth.Handlers\obj\Debug\net8.0\refint\auth.Handlers.dll
 C:\SimoneRepo\auth\auth.Handlers\obj\Debug\net8.0\auth.Handlers.pdb
 C:\SimoneRepo\auth\auth.Handlers\obj\Debug\net8.0\auth.Handlers.genruntimeconfig.cache
 C:\SimoneRepo\auth\auth.Handlers\obj\Debug\net8.0\ref\auth.Handlers.dll
+C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\AutoMapper.dll

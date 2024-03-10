@@ -20,6 +20,8 @@ namespace auth.Handlers.Model
             optionsBuilder.UseMySQL(configuration.GetConnectionString("AuthDB") ?? throw new Exception("Impossible to connect to the db"));
         }
 
+        public DbSet<Address> Address { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -36,6 +38,10 @@ namespace auth.Handlers.Model
             modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
             modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
             modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
+
+            // We'll create a relation between userId of IdentityUser and userId of Address 1-1
+            modelBuilder.Entity<Address>().HasOne(x => x.User).WithOne().HasForeignKey<Address>(x => x.UserId).IsRequired();
+
         }
 
     }

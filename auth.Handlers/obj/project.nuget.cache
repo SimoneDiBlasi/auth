@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "yZz2fnmcHXH7Mw600CPKc9+ApkK+ZYxeXeGtLSxBVfg+be/FvqmGNRA0QEfi+7YSKqrTxaa5sycD4zjrlWB6NQ==",
+  "dgSpecHash": "pzTQsDQRgAkjHiZj7On+4xM1LpjdfwHymrdqHKZSQ3nI/CPm64HmGxI2txVQcKKzbav/oXmdFuDiQhMs4uLrew==",
   "success": true,
   "projectFilePath": "C:\\SimoneRepo\\auth\\auth.Handlers\\auth.Handlers.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\s.deblasi\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\s.deblasi\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\s.deblasi\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\s.deblasi\\.nuget\\packages\\google.protobuf\\3.25.1\\google.protobuf.3.25.1.nupkg.sha512",

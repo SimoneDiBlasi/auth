@@ -53,6 +53,8 @@ builder.Services.AddSwaggerGen(c =>
             });
 });
 var secretKey = builder.Configuration.GetValue<string>("SecretKey");
+builder.Services.AddAutoMapper(typeof(Startup));
+
 
 builder.Services.AddAuthentication(options =>
 {
