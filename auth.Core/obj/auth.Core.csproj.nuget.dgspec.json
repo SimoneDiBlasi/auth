@@ -50,6 +50,10 @@
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
               "version": "[2.1.1, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.3, )"
             }
           },
           "imports": [

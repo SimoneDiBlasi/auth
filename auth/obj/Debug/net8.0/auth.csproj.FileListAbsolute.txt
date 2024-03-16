@@ -164,3 +164,5 @@ C:\SimoneRepo\auth\auth\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.re
 C:\SimoneRepo\auth\auth\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\SimoneRepo\auth\auth\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\SimoneRepo\auth\auth\bin\Debug\net8.0\AutoMapper.dll
+C:\SimoneRepo\auth\auth\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\SimoneRepo\auth\auth\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll

@@ -1,9 +1,9 @@
 ﻿using auth.Core.Interfaces;
 using auth.Core.Models.Signup;
 using auth.Handlers.Model;
-using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
 
 namespace auth.Handlers.Login
 {
@@ -13,15 +13,18 @@ namespace auth.Handlers.Login
         private readonly IEmail email;
         public readonly IConfiguration configuration;
         public readonly AuthDbContext db;
-        private readonly IMapper mapper;
+        public readonly IRole _role;
 
-        public SignupHandlers(IConfiguration configuration, UserManager<IdentityUser> userManager, IEmail email, AuthDbContext db, IMapper mapper)
+
+
+        public SignupHandlers(IConfiguration configuration, UserManager<IdentityUser> userManager, IEmail email, AuthDbContext db, IRole _role)
         {
             this.configuration = configuration;
             this.userManager = userManager;
             this.email = email;
             this.db = db;
-            this.mapper = mapper;
+            this._role = _role;
+
         }
 
         public async Task<SignupResponse> Signup(Signup request)
@@ -54,6 +57,17 @@ namespace auth.Handlers.Login
                     };
 
                     await db.Address.AddAsync(address);
+                }
+
+                if (request != null && request.Role != null)
+                {
+                    await _role.AddRole(request.Role.ToString() ?? string.Empty);
+                    await userManager.AddToRoleAsync(user, request.Role.ToString() ?? string.Empty);
+                }
+                if (request != null && request.Claims != null)
+                {
+                    var claims = request.Claims.Select(val => new Claim(val.Key.ToString(), val.Value));
+                    await userManager.AddClaimsAsync(user, claims);
                 }
                 var emailToken = await userManager.GenerateEmailConfirmationTokenAsync(user);
                 await email.SendRegistrationEmail(user.Email ?? string.Empty, user.Id, emailToken);
