@@ -95,6 +95,8 @@ builder.Services.AddScoped<ISignup, SignupHandlers>();
 builder.Services.AddScoped<IEmail, EmailHandler>();
 builder.Services.AddScoped<IRole, RolesHandlers>();
 builder.Services.AddScoped<IAuthorizationHandler, AuthorizationRequirementsHandler>();
+builder.Services.AddScoped<IAuthorizationHandler, CustomRequirementHandler>();
+
 // Questo viene fatto inoltre per creare delle classi custom come la tua identity user o identity role che utilizzano la interfaccia di identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
@@ -107,10 +109,9 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
     options.User.RequireUniqueEmail = true;
     options.SignIn.RequireConfirmedEmail = true;
-
 })
 .AddEntityFrameworkStores<AuthDbContext>()
-.AddDefaultTokenProviders();
+.AddDefaultTokenProviders(); //serve per gestire i vari OTP e altri metodi di sicurezza
 
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();

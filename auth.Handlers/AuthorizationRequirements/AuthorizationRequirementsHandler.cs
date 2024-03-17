@@ -22,7 +22,6 @@ namespace auth.Handlers.AuthorizationRequirements
                 context.Succeed(requirement);
             }
 
-
             return Task.CompletedTask;
 
         }

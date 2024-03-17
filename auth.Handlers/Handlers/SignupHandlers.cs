@@ -39,7 +39,7 @@ namespace auth.Handlers.Login
                 return new SignupResponse() { Successful = false, Errors = new List<string>() { "Password not valid" }, EmailToken = null, UserId = null };
 
 
-            var result = await userManager.CreateAsync(user, request.Password);
+            var result = await userManager.CreateAsync(user, request.Password); // gestire in una classe
             if (result.Succeeded)
             {
                 if (request.Address != null && (request.Address.City != null || request.Address.PostalCode != null || request.Address.State != null || request.Address.Country != null || request.Address.Street != null))
@@ -66,11 +66,11 @@ namespace auth.Handlers.Login
                 }
                 if (request != null && request.Claims != null)
                 {
-                    var claims = request.Claims.Select(val => new Claim(val.Key.ToString(), val.Value));
+                    var claims = request.Claims.Select(val => new Claim(val.Key.ToString(), val.Value)); // gestire i claims in una classe 
                     await userManager.AddClaimsAsync(user, claims);
                 }
                 var emailToken = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                await email.SendRegistrationEmail(user.Email ?? string.Empty, user.Id, emailToken);
+                await email.SendEmailWithTokenAsync(user.Email ?? string.Empty, user.Id, emailToken);
                 await db.SaveChangesAsync();
                 return new SignupResponse() { Successful = result.Succeeded, Errors = new List<string>(), EmailToken = emailToken, UserId = user.Id };
             }

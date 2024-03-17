@@ -39,17 +39,17 @@ namespace auth.Handlers.Email
             return regex.IsMatch(email);
         }
 
-        public async Task SendRegistrationEmail(string email, string userId, string emailToken)
+        public async Task SendEmailWithTokenAsync(string email, string userId, string emailToken)
         {
             var confirmationLink = $"https://localhost:7296/api/signup/confirm-email?userId={userId}&emailToken={emailToken}";
             var from = configuration["SMTP:User"] ?? throw new Exception("User is null or not valid");
             var to = email;
             var subject = "Please confirm your mail";
             var body = $"Per confermare il tuo account, <a href='{confirmationLink}'>clicca qui</a>";
-            await SendEmail(from, to, subject, body);
+            await SendEmailAsync(from, to, subject, body);
         }
 
-        private async Task SendEmail(string from, string to, string subject, string body)
+        public async Task SendEmailAsync(string from, string to, string subject, string body)
         {
             var message = new MailMessage(from, to, subject, body);
 

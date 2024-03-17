@@ -28,7 +28,6 @@ namespace auth.Handlers.Login
         }
 
 
-
         public async Task<bool> SetCookieAuthenticationHandler(string username, string password)
         {
 
@@ -64,7 +63,7 @@ namespace auth.Handlers.Login
                 // Se l'autenticazione ha successo, crea i claim per l'utente
                 var claims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name, credential.Username),
+                new Claim("UserId", user.Id),
                 new Claim("Admin", "true"), // Aggiungi il claim 'admin' per l'utente admin
                 new Claim("DeveloperExperienceYear","6")
                 // Altri claim se necessario

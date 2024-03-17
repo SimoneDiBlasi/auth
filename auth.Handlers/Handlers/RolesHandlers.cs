@@ -54,7 +54,6 @@ namespace auth.Handlers.Handlers
                 role.Name = newRole;
                 await roleManager.UpdateAsync(role);
                 return true;
-
             }
             return false;
         }
