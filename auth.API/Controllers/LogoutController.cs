@@ -15,22 +15,12 @@ namespace auth.API.Controllers
             this.logout = logout;
         }
 
-        [HttpGet]
-        [Authorize]
-        [Route("by-cookie")]
-        public async Task<IActionResult> LogoutByCookie()
-        {
-            var isProcessed = await logout.LogoutByCookie();
-            return isProcessed ? Ok("Logout successfull") : UnprocessableEntity();
-
-        }
 
         [HttpGet]
         [Authorize]
-        [Route("by-token")]
-        public async Task<IActionResult> LogoutToken()
+        public async Task<IActionResult> Logout()
         {
-            await logout.LogoutByToken();
+            await logout.Logout();
             return Ok();
         }
     }

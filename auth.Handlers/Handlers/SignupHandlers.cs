@@ -66,7 +66,7 @@ namespace auth.Handlers.Login
                 }
                 if (request != null && request.Claims != null)
                 {
-                    var claims = request.Claims.Select(val => new Claim(val.Key.ToString(), val.Value)); // gestire i claims in una classe 
+                    var claims = request.Claims.Select(val => new Claim(val.Key.ToString(), val.Value)); // gestire i claims in una classe e creare un dominio dei claims
                     await userManager.AddClaimsAsync(user, claims);
                 }
                 var emailToken = await userManager.GenerateEmailConfirmationTokenAsync(user);

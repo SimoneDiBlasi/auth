@@ -11,6 +11,7 @@ namespace auth.Handlers.Handlers
         {
             this.roleManager = roleManager;
         }
+
         public async Task AddRole(string roleName)
         {
             if (await roleManager.RoleExistsAsync(roleName) == false)

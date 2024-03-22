@@ -1,5 +1,4 @@
 using auth.Core.Interfaces;
-using auth.Core.Models.Login;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,24 +15,24 @@ namespace auth.API.Controllers
             this.login = login;
         }
 
+
         [AllowAnonymous]
         [HttpGet]
-        [Route("by-cookie")]
-        public async Task<IActionResult> SetCookieAuthenticationHandler(string username, string password)
+        [Route("validate-credential")]
+        public async Task<IActionResult> VerifyCredential(string email, string password)
         {
-            var results = await login.SetCookieAuthenticationHandler(username, password);
-            return results ? Ok(results) : Unauthorized();
+            var userId = await login.VerifyCredentialHandler(email, password);
+            return Ok(userId);
         }
 
         [AllowAnonymous]
-        [HttpPost]
-        [Route("by-token")]
-        public async Task<IActionResult> SetTokenAuthenticationHandler([FromBody] Credential credential)
+        [HttpGet]
+        [Route("login/{otp}")]
+        public async Task<IActionResult> Login(string userId, string otp)
         {
-            var token = await login.SetTokenAuthenticationHandler(credential);
+            var token = await login.LoginHandler(userId, otp);
             return Ok(token);
         }
-
 
         [Authorize(Policy = "SeniorDeveloperPolicy")]
         [HttpGet]

@@ -1,4 +1,5 @@
 ﻿using auth.Core.Interfaces;
+using auth.Core.Models.Email;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System.Net;
@@ -45,7 +46,7 @@ namespace auth.Handlers.Email
             var from = configuration["SMTP:User"] ?? throw new Exception("User is null or not valid");
             var to = email;
             var subject = "Please confirm your mail";
-            var body = $"Per confermare il tuo account, <a href='{confirmationLink}'>clicca qui</a>";
+            var body = EmailLayout.ConfirmationLayoutEmail(confirmationLink);
             await SendEmailAsync(from, to, subject, body);
         }
 

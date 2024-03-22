@@ -2,7 +2,6 @@
 {
     public interface ILogout
     {
-        public Task<bool> LogoutByCookie();
-        public Task LogoutByToken();
+        public Task Logout();
     }
 }

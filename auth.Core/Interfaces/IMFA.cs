@@ -1,9 +1,11 @@
-﻿namespace auth.Core.Interfaces
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace auth.Core.Interfaces
 {
     public interface IMFA
     {
-        public Task MultiFactorAuthenticationEmail(string email);
-        public Task UseOTPCodeByEmail(string securityCode);
+        public Task<bool> MultiFactorAuthenticationEmailAsync(IdentityUser user);
+        public Task<bool> UseOTPCodeByEmail(string securityCode);
 
     }
 }

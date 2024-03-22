@@ -1,4 +1,5 @@
 ﻿using auth.Core.Interfaces;
+using auth.Core.Models.Email;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 
@@ -20,22 +21,39 @@ namespace auth.Handlers.Handlers
         }
 
 
-        public async Task MultiFactorAuthenticationEmail(string email)
+        public async Task<bool> MultiFactorAuthenticationEmailAsync(IdentityUser user)
         {
-            var user = await userManager.FindByNameAsync(email);
             if (user == null)
-                return;
+                return false;
             var securityCode = await userManager.GenerateTwoFactorTokenAsync(user, "Email");
-            await emailService.SendEmailAsync(configuration["SMTP:User"] ?? string.Empty, email, "MyWebApp's OTP", $"Please use this code as the OTP: {securityCode}");
+            if (securityCode == null) return false;
+            try
+            {
+                var bodyLayout = new EmailLayout();
+                var from = configuration["SMTP:User"] ?? string.Empty;
+                var to = user.Email ?? string.Empty;
+                var subject = "Here your OTP Code";
+                var body = EmailLayout.OTPLayoutEmail(securityCode);
+                await emailService.SendEmailAsync(from, to, subject, body);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
-
-        public async Task UseOTPCodeByEmail(string securityCode)
+        public async Task<bool> UseOTPCodeByEmail(string securityCode)
         {
-            await signInManager.TwoFactorSignInAsync("Email", securityCode, false, false);
+            var task = await signInManager.TwoFactorSignInAsync("Email", securityCode, false, false);
+            if (task.Succeeded)
+            {
+                return true;
+            }
+            return false;
         }
 
         //crea quello per inviare al telefono 
-
     }
 }
+

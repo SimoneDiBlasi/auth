@@ -89,11 +89,12 @@ builder.Services.AddAuthorization(options =>
         policy.Requirements.Add(new SeniorRequirement { ExperienceYear = 5 }));
 });
 
-builder.Services.AddScoped<ILogin, AuthenticationHandlers>();
+builder.Services.AddScoped<ILogin, LoginHandlers>();
 builder.Services.AddScoped<ILogout, LogoutHandlers>();
 builder.Services.AddScoped<ISignup, SignupHandlers>();
 builder.Services.AddScoped<IEmail, EmailHandler>();
 builder.Services.AddScoped<IRole, RolesHandlers>();
+builder.Services.AddScoped<IMFA, MFAHandlers>();
 builder.Services.AddScoped<IAuthorizationHandler, AuthorizationRequirementsHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, CustomRequirementHandler>();
 
@@ -109,6 +110,9 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
     options.User.RequireUniqueEmail = true;
     options.SignIn.RequireConfirmedEmail = true;
+    options.SignIn.RequireConfirmedAccount = true; // Assicura che l'account sia confermato
+    options.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider; // Utilizza il provider predefinito per il token dell'autenticatore
+    options.Tokens.EmailConfirmationTokenProvider = TokenOptions.DefaultEmailProvider; // Utilizza il provider predefinito per il token di conferma dell'email
 })
 .AddEntityFrameworkStores<AuthDbContext>()
 .AddDefaultTokenProviders(); //serve per gestire i vari OTP e altri metodi di sicurezza

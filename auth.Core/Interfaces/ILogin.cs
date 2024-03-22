@@ -4,7 +4,7 @@ namespace auth.Core.Interfaces
 {
     public interface ILogin
     {
-        public Task<bool> SetCookieAuthenticationHandler(string username, string password);
-        public Task<Token?> SetTokenAuthenticationHandler(Credential credential);
+        public Task<string> VerifyCredentialHandler(string email, string password);
+        public Task<Token> LoginHandler(string userId, string otp);
     }
 }
