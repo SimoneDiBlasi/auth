@@ -19,7 +19,7 @@ namespace auth.Handlers.Email
             this.configuration = configuration;
         }
 
-        public async Task<bool> ConfirmEmail(string userId, string emailToken)
+        public async Task<bool> ConfirmEmail(string userId, string emailToken) // metti in signup
         {
             var user = await userManager.FindByIdAsync(userId);
             if (user == null) return false;
@@ -40,7 +40,7 @@ namespace auth.Handlers.Email
             return regex.IsMatch(email);
         }
 
-        public async Task SendEmailWithTokenAsync(string email, string userId, string emailToken)
+        public async Task SendEmailWithTokenAsync(string email, string userId, string emailToken) //metti in signup
         {
             var confirmationLink = $"https://localhost:7296/api/signup/confirm-email?userId={userId}&emailToken={emailToken}";
             var from = configuration["SMTP:User"] ?? throw new Exception("User is null or not valid");

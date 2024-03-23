@@ -40,6 +40,7 @@ namespace auth.Handlers.Login
                 var result = await signInManager.PasswordSignInAsync(user, password, false, true);
                 if (result.IsLockedOut)
                     return "Account is locked, you have to wait";
+                await userManager.SetTwoFactorEnabledAsync(user, true);
                 return user.Id;
             }
 
@@ -68,6 +69,7 @@ namespace auth.Handlers.Login
                 };
                 return token;
             }
+
             return new Token { AccessToken = null, ExpiresAt = null, Errors = "Failed to login, code otp is wrong" };
 
         }

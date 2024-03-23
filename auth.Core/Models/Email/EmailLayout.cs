@@ -35,6 +35,22 @@
                 </div>
             </body>";
         }
+
+        public static string PasswordRecoveryLayoutEmail(string passwordRecoveyLink)
+        {
+            return $@"
+            <body style=""font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh;"">
+                <div style=""text-align: center; background-color: #ffffff; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); padding: 40px; max-width: 400px; width: 100%;"">
+                    <h2 style=""color: #2c3e50; font-size: 24px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;"">Gentile utente,</h2>
+                    <p style=""margin-bottom: 20px;"">Per il recupero password, clicca sul pulsante sottostante:</p>
+                    <a href=""{passwordRecoveyLink}"" style=""text-decoration: none;"">
+                        <button style=""padding: 12px 24px; background-color: #3498db; color: #fff; border: none; cursor: pointer; border-radius: 25px; transition: background-color 0.3s ease; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; outline: none;"">Conferma il tuo account</button>
+                    </a>
+                    <p style=""margin-top: 20px;"">Se non hai richiesto alcun cambio password, contatta il servizio clienti.</p>
+                </div>
+            </body>
+         ";
+        }
     }
 }
 
