@@ -27,7 +27,7 @@ namespace auth.Handlers.Login
 
         }
 
-        public async Task<SignupResponse> Signup(Signup request)
+        public async Task<SignupResponse> SignupAsync(Signup request)
         {
 
             var isValidEmail = request.Email != null && email.IsValidEmail(request.Email);
@@ -61,7 +61,7 @@ namespace auth.Handlers.Login
 
                 if (request != null && request.Role != null)
                 {
-                    await _role.AddRole(request.Role.ToString() ?? string.Empty);
+                    await _role.AddRoleAsync(request.Role.ToString() ?? string.Empty);
                     await userManager.AddToRoleAsync(user, request.Role.ToString() ?? string.Empty);
                 }
                 if (request != null && request.Claims != null)

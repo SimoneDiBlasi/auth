@@ -23,7 +23,7 @@ namespace auth.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Signup([FromBody] Signup request)
         {
-            var results = await signup.Signup(request);
+            var results = await signup.SignupAsync(request);
             if (results.Successful)
                 return Ok("User correctly registrated");
             return BadRequest(results.Errors);
@@ -32,9 +32,9 @@ namespace auth.API.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("confirm-email")]
-        public async Task<IActionResult> ConfirmEmail(string userId, string emailToken)
+        public async Task<IActionResult> ConfirmEmailAsync(string userId, string emailToken)
         {
-            var result = await email.ConfirmEmail(userId, emailToken);
+            var result = await email.ConfirmEmailAsync(userId, emailToken);
             if (result) return Ok("Email confermata");
             return BadRequest();
         }

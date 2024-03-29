@@ -4,10 +4,10 @@ namespace auth.Core.Interfaces
 {
     public interface IRole
     {
-        public Task<IdentityRole> GetRole(string roleName);
-        public Task<List<IdentityRole>> GetRoles();
-        public Task AddRole(string roleName);
-        public Task<bool> UpdateRole(string roleName, string newRole);
-        public Task<bool> DeleteRole(string roleName);
+        public Task<IdentityRole> GetRoleAsync(string roleName);
+        public Task<List<IdentityRole>> GetRolesAsync();
+        public Task AddRoleAsync(string roleName);
+        public Task<bool> UpdateRoleAsync(string roleName, string newRole);
+        public Task<bool> DeleteRoleAsync(string roleName);
     }
 }

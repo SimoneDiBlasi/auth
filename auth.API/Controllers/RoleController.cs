@@ -29,7 +29,7 @@ namespace auth.API.Controllers
             {
                 return Forbid();
             }
-            var role = await _role.GetRole(roleName);
+            var role = await _role.GetRoleAsync(roleName);
             return Ok(role);
 
         }
@@ -44,7 +44,7 @@ namespace auth.API.Controllers
             {
                 return Forbid();
             }
-            var roles = await _role.GetRoles();
+            var roles = await _role.GetRolesAsync();
             return Ok(roles);
         }
 
@@ -59,7 +59,7 @@ namespace auth.API.Controllers
                 return Forbid();
             }
 
-            await _role.AddRole(roleName);
+            await _role.AddRoleAsync(roleName);
             return Ok();
         }
 
@@ -74,7 +74,7 @@ namespace auth.API.Controllers
                 return Forbid();
             }
 
-            var isUpdated = await _role.UpdateRole(roleName, newRole);
+            var isUpdated = await _role.UpdateRoleAsync(roleName, newRole);
             return isUpdated ? Ok() : BadRequest();
 
         }
@@ -90,7 +90,7 @@ namespace auth.API.Controllers
                 return Forbid();
             }
 
-            var isDeleted = await _role.DeleteRole(roleName);
+            var isDeleted = await _role.DeleteRoleAsync(roleName);
             return isDeleted ? Ok() : BadRequest();
 
         }

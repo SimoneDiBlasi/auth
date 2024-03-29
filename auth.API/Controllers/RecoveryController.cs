@@ -21,21 +21,20 @@ namespace auth.API.Controllers
         [Route("/email-password")]
         public async Task<IActionResult> SendEmailRecoveryPassword(string userId)
         {
-
-            var isSent = await recovery.SendEmailRecoveryPassword(userId);
+            var isSent = await recovery.SendEmailRecoveryPasswordAsync(userId);
             return Ok(isSent);
-
         }
 
 
         [AllowAnonymous]
         [HttpGet]
         [Route("/password")]
-        public async Task<IActionResult> RecoveryPassword(string userId, string passwordToken)
+        public async Task<IActionResult> ChangePassword(string userId, string newPassword, string passwordToken)
         {
-            var isSent = await recovery.RecoveryPassword(userId, passwordToken);
-            return Ok(isSent);
-
+            var isChanged = await recovery.ChangePasswordAsync(userId, newPassword, passwordToken);
+            if (isChanged)
+                return Ok();
+            return BadRequest();
         }
     }
 }

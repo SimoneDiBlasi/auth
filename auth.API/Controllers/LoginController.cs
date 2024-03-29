@@ -21,7 +21,7 @@ namespace auth.API.Controllers
         [Route("validate-credential")]
         public async Task<IActionResult> VerifyCredential(string email, string password)
         {
-            var userId = await login.VerifyCredentialHandler(email, password);
+            var userId = await login.VerifyCredentialAsync(email, password);
             return Ok(userId);
         }
 
@@ -30,7 +30,7 @@ namespace auth.API.Controllers
         [Route("login/{otp}")]
         public async Task<IActionResult> Login(string userId, string otp)
         {
-            var token = await login.LoginHandler(userId, otp);
+            var token = await login.LoginAsync(userId, otp);
             return Ok(token);
         }
 

@@ -20,7 +20,7 @@ namespace auth.API.Controllers
         [Authorize]
         public async Task<IActionResult> Logout()
         {
-            await logout.Logout();
+            await logout.LogoutAsync();
             return Ok();
         }
     }

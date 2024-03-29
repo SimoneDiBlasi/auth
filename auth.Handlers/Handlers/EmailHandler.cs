@@ -19,7 +19,7 @@ namespace auth.Handlers.Email
             this.configuration = configuration;
         }
 
-        public async Task<bool> ConfirmEmail(string userId, string emailToken) // metti in signup
+        public async Task<bool> ConfirmEmailAsync(string userId, string emailToken) // metti in signup
         {
             var user = await userManager.FindByIdAsync(userId);
             if (user == null) return false;

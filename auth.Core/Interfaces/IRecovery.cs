@@ -2,6 +2,7 @@
 {
     public interface IRecovery
     {
-        public Task<bool> SendEmailRecoveryPassword(string userId);
+        public Task<bool> SendEmailRecoveryPasswordAsync(string userId);
+        public Task<bool> ChangePasswordAsync(string userId, string newPassword, string passwordToken);
     }
 }

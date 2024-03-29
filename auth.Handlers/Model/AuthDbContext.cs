@@ -27,7 +27,7 @@ namespace auth.Handlers.Model
             base.OnModelCreating(modelBuilder);
 
             //sovrascrivo il comportamento di identity. Questo per evitare conflitti e tabella duplicate con tipi diversi
-            // N.B il tipo di deafault per la chiave è string, quindi qual'ora di voglia cambiare il tipo bisogna ignorare le tabelle identity come chiave stringa nella migrazione
+            // N.B il tipo di deafault per la chiave è string, quindi qual'ora si voglia cambiare il tipo bisogna ignorare le tabelle identity come chiave stringa nella migrazione
             modelBuilder.HasDefaultSchema("auth");
 
             // Change table names

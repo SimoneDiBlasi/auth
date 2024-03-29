@@ -24,7 +24,7 @@ namespace auth.Handlers.Login
             this.mfa = mfa;
         }
 
-        public async Task<string> VerifyCredentialHandler(string email, string password)
+        public async Task<string> VerifyCredentialAsync(string email, string password)
         {
             var user = await userManager.FindByEmailAsync(email);
             if (user == null)
@@ -48,7 +48,7 @@ namespace auth.Handlers.Login
         }
 
 
-        public async Task<Token> LoginHandler(string userId, string otp)
+        public async Task<Token> LoginAsync(string userId, string otp)
         {
             var user = await userManager.FindByIdAsync(userId);
             if (user == null)
@@ -58,7 +58,7 @@ namespace auth.Handlers.Login
             if (!claims.Any())
                 return new Token { AccessToken = null, ExpiresAt = null, Errors = "Failed to login" }; ;
 
-            var isCorrect = await mfa.UseOTPCodeByEmail(otp);
+            var isCorrect = await mfa.UseOTPCodeByEmailAsync(otp);
             if (isCorrect)
             {
                 var expiresAt = DateTime.UtcNow.AddHours(2);

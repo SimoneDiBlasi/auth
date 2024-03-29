@@ -12,7 +12,7 @@ namespace auth.Handlers.Handlers
             this.roleManager = roleManager;
         }
 
-        public async Task AddRole(string roleName)
+        public async Task AddRoleAsync(string roleName)
         {
             if (await roleManager.RoleExistsAsync(roleName) == false)
             {
@@ -22,7 +22,7 @@ namespace auth.Handlers.Handlers
             }
         }
 
-        public async Task<bool> DeleteRole(string roleName)
+        public async Task<bool> DeleteRoleAsync(string roleName)
         {
             var role = await roleManager.FindByNameAsync(roleName);
 
@@ -35,17 +35,17 @@ namespace auth.Handlers.Handlers
             return false;
         }
 
-        public async Task<IdentityRole> GetRole(string roleName)
+        public async Task<IdentityRole> GetRoleAsync(string roleName)
         {
             return await roleManager.Roles.Where(val => val.Name == roleName).FirstOrDefaultAsync();
         }
 
-        public async Task<List<IdentityRole>> GetRoles()
+        public async Task<List<IdentityRole>> GetRolesAsync()
         {
             return await roleManager.Roles.ToListAsync();
         }
 
-        public async Task<bool> UpdateRole(string roleName, string newRole)
+        public async Task<bool> UpdateRoleAsync(string roleName, string newRole)
         {
             var role = await roleManager.FindByNameAsync(roleName);
 

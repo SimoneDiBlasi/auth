@@ -12,7 +12,7 @@ namespace auth.Handlers.Logout
             this.signInManager = signInManager;
         }
 
-        public async Task Logout()
+        public async Task LogoutAsync()
         {
             await signInManager.SignOutAsync();
         }

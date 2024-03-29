@@ -43,7 +43,7 @@ namespace auth.Handlers.Handlers
             }
         }
 
-        public async Task<bool> UseOTPCodeByEmail(string securityCode)
+        public async Task<bool> UseOTPCodeByEmailAsync(string securityCode)
         {
             var task = await signInManager.TwoFactorSignInAsync("Email", securityCode, false, false);
             if (task.Succeeded)

@@ -2,6 +2,6 @@
 {
     public interface ILogout
     {
-        public Task Logout();
+        public Task LogoutAsync();
     }
 }
