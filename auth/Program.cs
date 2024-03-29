@@ -9,6 +9,7 @@ using auth.Handlers.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -25,7 +26,11 @@ var controllerAssembly = Assembly.Load("auth.API");
 mvcBuilder.AddApplicationPart(controllerAssembly);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddDbContext<AuthDbContext>(); ; //in futuro vedere se inserendo le option con la connection string le migrazioni non rompono 
+builder.Services.AddDbContext<AuthDbContext>(options =>
+{
+    options.UseMySQL(builder.Configuration.GetConnectionString("AuthDB") ?? string.Empty);
+});
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });

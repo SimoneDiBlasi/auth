@@ -8,6 +8,7 @@ namespace auth.Core.Models.Signup
         public required string Email { get; set; }
         public required string Password { get; set; }
         public required string ConfirmPassword { get; set; }
+        public required string PhoneNumber { get; set; }
         public Address? Address { get; set; }
         public EnumRoles? Role { get; set; }
         public Dictionary<ClaimsKey, string>? Claims { get; set; }

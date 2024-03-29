@@ -1,22 +1,21 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
 namespace auth.Handlers.Model
 {
-    public class AuthDbContext : IdentityDbContext
+    public class AuthDbContext(DbContextOptions<AuthDbContext> options) : IdentityDbContext(options)
     {
-        public readonly IConfiguration configuration;
-
-
-        public AuthDbContext(DbContextOptions<AuthDbContext> options, IConfiguration configuration) : base(options)
-        {
-            this.configuration = configuration;
-        }
-
+        //private readonly IConfiguration configuration;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            base.OnConfiguring(optionsBuilder);
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(Path.Combine(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString(), "auth"))
+                    .AddJsonFile("appsettings.json")
+                     .Build();
             optionsBuilder.UseMySQL(configuration.GetConnectionString("AuthDB") ?? throw new Exception("Impossible to connect to the db"));
         }
 
@@ -43,6 +42,15 @@ namespace auth.Handlers.Model
             modelBuilder.Entity<Address>().HasOne(x => x.User).WithOne().HasForeignKey<Address>(x => x.UserId).IsRequired();
 
         }
+    }
 
+    public class AuthDbSQLContextFactory() : IDesignTimeDbContextFactory<AuthDbContext>
+    {
+        public AuthDbContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<AuthDbContext>();
+            optionsBuilder.UseMySQL();
+            return new AuthDbContext(optionsBuilder.Options);
+        }
     }
 }

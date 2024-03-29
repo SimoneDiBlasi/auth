@@ -52,8 +52,6 @@ namespace auth.Handlers.Handlers
             }
             return false;
         }
-
-        //crea quello per inviare al telefono 
     }
 }
 

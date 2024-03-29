@@ -33,7 +33,7 @@ namespace auth.Handlers.Login
             var isValidEmail = request.Email != null && email.IsValidEmail(request.Email);
             if (!isValidEmail) return new SignupResponse() { Successful = false, Errors = new List<string>() { "Email not valid" }, EmailToken = null, UserId = null };
 
-            var user = new IdentityUser { Email = request.Email, UserName = request.Username };
+            var user = new IdentityUser { Email = request.Email, UserName = request.Username, PhoneNumber = request.PhoneNumber };
 
             if (request.Password == null || request.Password != request.ConfirmPassword)
                 return new SignupResponse() { Successful = false, Errors = new List<string>() { "Password not valid" }, EmailToken = null, UserId = null };
