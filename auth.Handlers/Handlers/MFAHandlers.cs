@@ -2,6 +2,7 @@
 using auth.Core.Models.Email;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace auth.Handlers.Handlers
 {
@@ -11,13 +12,15 @@ namespace auth.Handlers.Handlers
         public readonly SignInManager<IdentityUser> signInManager;
         private readonly IEmail emailService;
         private readonly IConfiguration configuration;
+        private readonly ILogger<MFAHandlers> logger;
 
-        public MFAHandlers(UserManager<IdentityUser> userManager, IEmail emailService, IConfiguration configuration, SignInManager<IdentityUser> signInManager)
+        public MFAHandlers(UserManager<IdentityUser> userManager, IEmail emailService, IConfiguration configuration, SignInManager<IdentityUser> signInManager, ILogger<MFAHandlers> logger)
         {
             this.userManager = userManager;
             this.emailService = emailService;
             this.configuration = configuration;
             this.signInManager = signInManager;
+            this.logger = logger;
         }
 
 
@@ -39,6 +42,7 @@ namespace auth.Handlers.Handlers
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "An error occurred while sending multi-factor authentication email.");
                 return false;
             }
         }

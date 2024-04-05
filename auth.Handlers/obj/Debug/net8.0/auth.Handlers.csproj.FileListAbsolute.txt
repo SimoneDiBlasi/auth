@@ -3,6 +3,7 @@ C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\auth.Handlers.deps.json
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\auth.Handlers.runtimeconfig.json
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\auth.Handlers.dll
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\auth.Handlers.pdb
+C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\AutoMapper.dll
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\EntityFramework.SqlServer.dll
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\EntityFramework.dll
@@ -26,9 +27,11 @@ C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
 C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
@@ -137,6 +140,3 @@ C:\SimoneRepo\auth\auth.Handlers\obj\Debug\net8.0\refint\auth.Handlers.dll
 C:\SimoneRepo\auth\auth.Handlers\obj\Debug\net8.0\auth.Handlers.pdb
 C:\SimoneRepo\auth\auth.Handlers\obj\Debug\net8.0\auth.Handlers.genruntimeconfig.cache
 C:\SimoneRepo\auth\auth.Handlers\obj\Debug\net8.0\ref\auth.Handlers.dll
-C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\AutoMapper.dll
-C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\SimoneRepo\auth\auth.Handlers\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll

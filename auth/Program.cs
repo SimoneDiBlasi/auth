@@ -94,6 +94,11 @@ builder.Services.AddAuthorization(options =>
         policy.Requirements.Add(new SeniorRequirement { ExperienceYear = 5 }));
 });
 
+builder.Services.AddLogging(builder =>
+{
+    builder.AddConsole(); // Configura il provider di logging per registrare i messaggi sulla console
+});
+
 builder.Services.AddScoped<ILogin, LoginHandlers>();
 builder.Services.AddScoped<ILogout, LogoutHandlers>();
 builder.Services.AddScoped<ISignup, SignupHandlers>();
