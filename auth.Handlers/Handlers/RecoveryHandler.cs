@@ -9,13 +9,13 @@ namespace auth.Handlers.Recovery
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly IConfiguration configuration;
-        private readonly IEmail email;
+        private readonly IEmail _email;
 
-        public RecoveryHandler(UserManager<IdentityUser> userManager, IConfiguration configuration, IEmail email)
+        public RecoveryHandler(UserManager<IdentityUser> userManager, IConfiguration configuration, IEmail _email)
         {
             this.userManager = userManager;
             this.configuration = configuration;
-            this.email = email;
+            this._email = _email;
         }
 
         public async Task<bool> ChangePasswordAsync(string userId, string newPassword, string passwordToken)
@@ -36,9 +36,9 @@ namespace auth.Handlers.Recovery
             return false;
         }
 
-        public async Task<bool> SendEmailRecoveryPasswordAsync(string userId)
+        public async Task<bool> SendEmailRecoveryPasswordAsync(string email)
         {
-            var user = await userManager.FindByIdAsync(userId);
+            var user = await userManager.FindByEmailAsync(email);
             if (user == null) return false;
             var passwordToken = await userManager.GeneratePasswordResetTokenAsync(user);
             if (passwordToken == null)
@@ -48,7 +48,7 @@ namespace auth.Handlers.Recovery
             var to = user.Email ?? string.Empty;
             var subject = "Here your OTP Code";
             var body = EmailLayout.PasswordRecoveryLayoutEmail(passwordRecoveyLink);
-            await email.SendEmailAsync(from, to, subject, body);
+            await _email.SendEmailAsync(from, to, subject, body);
             return true;
 
         }

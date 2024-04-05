@@ -23,7 +23,7 @@ namespace auth.API.Controllers
         /// <returns>True if the recovery email was sent successfully, otherwise false.</returns>
         [AllowAnonymous]
         [HttpGet]
-        [Route("/email-password")]
+        [Route("email-password")]
         [ProducesResponseType(typeof(bool), 200)]
         [ProducesResponseType(typeof(void), 400)]
         public async Task<IActionResult> SendEmailRecoveryPassword(string userId)
@@ -43,7 +43,7 @@ namespace auth.API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("/password")]
+        [Route("password")]
         [ProducesResponseType(typeof(void), 200)]
         [ProducesResponseType(typeof(void), 400)]
         public async Task<IActionResult> ChangePassword(string userId, string newPassword, string passwordToken)

@@ -6,6 +6,7 @@ using auth.Handlers.Handlers;
 using auth.Handlers.Login;
 using auth.Handlers.Logout;
 using auth.Handlers.Model;
+using auth.Handlers.Recovery;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -105,6 +106,7 @@ builder.Services.AddScoped<ISignup, SignupHandlers>();
 builder.Services.AddScoped<IEmail, EmailHandler>();
 builder.Services.AddScoped<IRole, RolesHandlers>();
 builder.Services.AddScoped<IMFA, MFAHandlers>();
+builder.Services.AddScoped<IRecovery, RecoveryHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, AuthorizationRequirementsHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, CustomRequirementHandler>();
 

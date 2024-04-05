@@ -40,7 +40,7 @@ namespace auth.API.Controllers
         /// <returns>The authentication token if login is successful.</returns>
         [AllowAnonymous]
         [HttpGet]
-        [Route("login/{otp}")]
+        [Route("{otp}")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> Login(string userId, string otp)

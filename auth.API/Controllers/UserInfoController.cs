@@ -26,7 +26,7 @@ namespace auth.API.Controllers
         /// <returns>The user information if the user is authorized, otherwise returns a 403 Forbidden response.</returns>
         [Authorize]
         [HttpGet]
-        [Route("/{id}")]
+        [Route("{id}")]
         [ProducesResponseType(typeof(IdentityUser), 200)]
         [ProducesResponseType(403)]
         [ProducesResponseType(404)]
