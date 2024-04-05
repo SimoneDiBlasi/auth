@@ -27,8 +27,9 @@ namespace auth.API.Controllers
         [Authorize]
         [HttpGet]
         [Route("/{id}")]
-        [ProducesResponseType(typeof(IdentityUser), 200)] // Success
-        [ProducesResponseType(403)] // Forbidden
+        [ProducesResponseType(typeof(IdentityUser), 200)]
+        [ProducesResponseType(403)]
+        [ProducesResponseType(404)]
         public async Task<IActionResult> GetUserInfo(string id)
         {
             var authorizationResult = await authorizationService.AuthorizeAsync(User, id, new CustomRequirement(id));
@@ -37,8 +38,7 @@ namespace auth.API.Controllers
                 return Forbid();
             }
             var user = await userManager.FindByIdAsync(id);
-            return Ok(user);
-
+            return user != null ? Ok(user) : NotFound();
         }
     }
 }

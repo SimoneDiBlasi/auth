@@ -13,7 +13,6 @@ namespace auth.API.Controllers
         private readonly IRole _role;
         private readonly IAuthorizationService authorizationService;
 
-
         public RoleController(IRole _role, IAuthorizationService authorizationService)
         {
             this._role = _role;
@@ -31,6 +30,7 @@ namespace auth.API.Controllers
         [Route("role/{roleName}")]
         [ProducesResponseType(typeof(IdentityRole), 200)]
         [ProducesResponseType(403)]
+        [ProducesResponseType(404)]
         public async Task<IActionResult> GetRoleByName(string userId, string roleName)
         {
             var authorizationResult = await authorizationService.AuthorizeAsync(User, userId, new CustomRequirement(userId));
@@ -39,7 +39,7 @@ namespace auth.API.Controllers
                 return Forbid();
             }
             var role = await _role.GetRoleAsync(roleName);
-            return Ok(role);
+            return role != null ? Ok(role) : NotFound();
 
         }
 
@@ -53,6 +53,7 @@ namespace auth.API.Controllers
         [Route("roles")]
         [ProducesResponseType(typeof(List<IdentityRole>), 200)]
         [ProducesResponseType(403)]
+        [ProducesResponseType(404)]
         public async Task<IActionResult> GetRoles(string userId)
         {
             var authorizationResult = await authorizationService.AuthorizeAsync(User, userId, new CustomRequirement(userId));
@@ -61,7 +62,7 @@ namespace auth.API.Controllers
                 return Forbid();
             }
             var roles = await _role.GetRolesAsync();
-            return Ok(roles);
+            return roles.Any() ? Ok(roles) : NotFound();
         }
 
         /// <summary>

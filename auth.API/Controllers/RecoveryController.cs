@@ -49,9 +49,7 @@ namespace auth.API.Controllers
         public async Task<IActionResult> ChangePassword(string userId, string newPassword, string passwordToken)
         {
             var isChanged = await recovery.ChangePasswordAsync(userId, newPassword, passwordToken);
-            if (isChanged)
-                return Ok();
-            return BadRequest();
+            return isChanged ? Ok() : BadRequest();
         }
     }
 }

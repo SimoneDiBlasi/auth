@@ -8,13 +8,12 @@ namespace auth.API.Controllers
     [Route("api/logout")]
     public class LogoutController : ControllerBase
     {
-
         public readonly ILogout logout;
+
         public LogoutController(ILogout logout)
         {
             this.logout = logout;
         }
-
 
         /// <summary>
         /// Logs out the currently authenticated user.

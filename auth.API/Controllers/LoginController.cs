@@ -46,16 +46,7 @@ namespace auth.API.Controllers
         public async Task<IActionResult> Login(string userId, string otp)
         {
             var token = await login.LoginAsync(userId, otp);
-            return Ok(token);
-        }
-
-        [Authorize(Policy = "SeniorDeveloperPolicy")]
-        [HttpGet]
-        [Route("policy")]
-
-        public IActionResult AmISeniorDeveloper()
-        {
-            return Ok("si sono un senior developer");
+            return token != null ? Ok(token) : BadRequest();
         }
     }
 }

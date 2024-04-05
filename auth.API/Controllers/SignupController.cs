@@ -9,10 +9,9 @@ namespace auth.API.Controllers
     [Route("api/signup")]
     public class SignupController : ControllerBase
     {
-
         public readonly IEmail email;
-
         public readonly ISignup signup;
+
         public SignupController(ISignup signup, IEmail email)
         {
             this.signup = signup;
@@ -31,9 +30,7 @@ namespace auth.API.Controllers
         public async Task<IActionResult> Signup([FromBody] Signup request)
         {
             var results = await signup.SignupAsync(request);
-            if (results.Successful)
-                return Ok("User correctly registrated");
-            return BadRequest(results.Errors);
+            return results.Successful ? Ok("User correctly registrated") : BadRequest(results.Errors);
         }
 
         /// <summary>
@@ -50,8 +47,7 @@ namespace auth.API.Controllers
         public async Task<IActionResult> ConfirmEmailAsync(string userId, string emailToken)
         {
             var result = await email.ConfirmEmailAsync(userId, emailToken);
-            if (result) return Ok("Email confermata");
-            return BadRequest();
+            return result ? Ok("Email confermata") : BadRequest();
         }
     }
 }
