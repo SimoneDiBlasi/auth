@@ -16,8 +16,14 @@ namespace auth.API.Controllers
         }
 
 
+        /// <summary>
+        /// Logs out the currently authenticated user.
+        /// </summary>
+        /// <returns>An HTTP status code indicating the success of the operation.</returns>
         [HttpGet]
         [Authorize]
+        [ProducesResponseType(typeof(void), 200)]
+        [ProducesResponseType(typeof(void), 401)]
         public async Task<IActionResult> Logout()
         {
             await logout.LogoutAsync();

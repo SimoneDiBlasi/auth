@@ -7,6 +7,7 @@ namespace auth.API.Controllers
 {
     [ApiController]
     [Route("api/userinfo")]
+
     public class UserInfoController : ControllerBase
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -18,9 +19,16 @@ namespace auth.API.Controllers
             this.authorizationService = authorizationService;
         }
 
+        /// <summary>
+        /// Retrieves user information by user ID.
+        /// </summary>
+        /// <param name="id">The user ID.</param>
+        /// <returns>The user information if the user is authorized, otherwise returns a 403 Forbidden response.</returns>
         [Authorize]
         [HttpGet]
         [Route("/{id}")]
+        [ProducesResponseType(typeof(IdentityUser), 200)] // Success
+        [ProducesResponseType(403)] // Forbidden
         public async Task<IActionResult> GetUserInfo(string id)
         {
             var authorizationResult = await authorizationService.AuthorizeAsync(User, id, new CustomRequirement(id));

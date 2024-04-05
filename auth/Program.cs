@@ -33,8 +33,8 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Auth API", Version = "v1" });
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "auth.API.xml"));
     // Configura l'autenticazione JWT per Swagger
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -54,9 +54,9 @@ builder.Services.AddSwaggerGen(c =>
                             Id = "Bearer"
                         }
                     },
-            new string[] {}
-        }
-            });
+                    new string[] {}
+                }
+     });
 });
 var secretKey = builder.Configuration.GetValue<string>("SecretKey");
 builder.Services.AddAutoMapper(typeof(Startup));

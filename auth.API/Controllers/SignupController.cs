@@ -19,8 +19,15 @@ namespace auth.API.Controllers
             this.email = email;
         }
 
+        /// <summary>
+        /// Registers a new user.
+        /// </summary>
+        /// <param name="request">The signup request containing user information.</param>
+        /// <returns>An HTTP status code indicating the success of the operation.</returns>
         [AllowAnonymous]
         [HttpPost]
+        [ProducesResponseType(typeof(void), 200)]
+        [ProducesResponseType(typeof(IEnumerable<string>), 400)]
         public async Task<IActionResult> Signup([FromBody] Signup request)
         {
             var results = await signup.SignupAsync(request);
@@ -29,9 +36,17 @@ namespace auth.API.Controllers
             return BadRequest(results.Errors);
         }
 
+        /// <summary>
+        /// Confirms a user's email address.
+        /// </summary>
+        /// <param name="userId">The user ID.</param>
+        /// <param name="emailToken">The email confirmation token.</param>
+        /// <returns>An HTTP status code indicating the success of the operation.</returns>
         [AllowAnonymous]
         [HttpGet]
         [Route("confirm-email")]
+        [ProducesResponseType(typeof(void), 200)]
+        [ProducesResponseType(typeof(void), 400)]
         public async Task<IActionResult> ConfirmEmailAsync(string userId, string emailToken)
         {
             var result = await email.ConfirmEmailAsync(userId, emailToken);

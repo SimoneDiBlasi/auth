@@ -1,5 +1,6 @@
 using auth.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
@@ -19,9 +20,17 @@ namespace auth.API.Controllers
             this.authorizationService = authorizationService;
         }
 
+        /// <summary>
+        /// Gets a role by its name.
+        /// </summary>
+        /// <param name="userId">The user ID for authorization.</param>
+        /// <param name="roleName">The name of the role to retrieve.</param>
+        /// <returns>The role information if found, otherwise returns a 403 Forbidden response.</returns>
         [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("role/{roleName}")]
+        [ProducesResponseType(typeof(IdentityRole), 200)]
+        [ProducesResponseType(403)]
         public async Task<IActionResult> GetRoleByName(string userId, string roleName)
         {
             var authorizationResult = await authorizationService.AuthorizeAsync(User, userId, new CustomRequirement(userId));
@@ -34,9 +43,16 @@ namespace auth.API.Controllers
 
         }
 
+        /// <summary>
+        /// Gets all roles.
+        /// </summary>
+        /// <param name="userId">The user ID for authorization.</param>
+        /// <returns>A list of all roles if the user is authorized, otherwise returns a 403 Forbidden response.</returns>
         [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("roles")]
+        [ProducesResponseType(typeof(List<IdentityRole>), 200)]
+        [ProducesResponseType(403)]
         public async Task<IActionResult> GetRoles(string userId)
         {
             var authorizationResult = await authorizationService.AuthorizeAsync(User, userId, new CustomRequirement(userId));
@@ -48,10 +64,18 @@ namespace auth.API.Controllers
             return Ok(roles);
         }
 
+        /// <summary>
+        /// Adds a new role.
+        /// </summary>
+        /// <param name="userId">The user ID for authorization.</param>
+        /// <param name="roleName">The name of the role to add.</param>
+        /// <returns>An HTTP status code indicating the success of the operation.</returns>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("role/{roleName}")]
-        public async Task<IActionResult> addRole(string userId, string roleName)
+        [ProducesResponseType(typeof(void), 200)]
+        [ProducesResponseType(403)]
+        public async Task<IActionResult> AddRole(string userId, string roleName)
         {
             var authorizationResult = await authorizationService.AuthorizeAsync(User, userId, new CustomRequirement(userId));
             if (!authorizationResult.Succeeded)
@@ -63,10 +87,20 @@ namespace auth.API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Updates an existing role.
+        /// </summary>
+        /// <param name="userId">The user ID for authorization.</param>
+        /// <param name="roleName">The name of the role to update.</param>
+        /// <param name="newRole">The new role name.</param>
+        /// <returns>An HTTP status code indicating the success of the operation.</returns>
         [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("role/{roleName}")]
-        public async Task<IActionResult> updateRole(string userId, string roleName, string newRole)
+        [ProducesResponseType(typeof(void), 200)]
+        [ProducesResponseType(typeof(void), 400)]
+        [ProducesResponseType(403)]
+        public async Task<IActionResult> UpdateRole(string userId, string roleName, string newRole)
         {
             var authorizationResult = await authorizationService.AuthorizeAsync(User, userId, new CustomRequirement(userId));
             if (!authorizationResult.Succeeded)
@@ -79,10 +113,19 @@ namespace auth.API.Controllers
 
         }
 
+        /// <summary>
+        /// Deletes a role.
+        /// </summary>
+        /// <param name="userId">The user ID for authorization.</param>
+        /// <param name="roleName">The name of the role to delete.</param>
+        /// <returns>An HTTP status code indicating the success of the operation.</returns>
         [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("role/{roleName}")]
-        public async Task<IActionResult> deleteRole(string userId, string roleName)
+        [ProducesResponseType(typeof(void), 200)]
+        [ProducesResponseType(typeof(void), 400)]
+        [ProducesResponseType(403)]
+        public async Task<IActionResult> DeleteRole(string userId, string roleName)
         {
             var authorizationResult = await authorizationService.AuthorizeAsync(User, userId, new CustomRequirement(userId));
             if (!authorizationResult.Succeeded)

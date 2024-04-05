@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>auth.API</name>
+    </assembly>
+    <members>
+        <member name="M:auth.API.Controllers.LoginController.VerifyCredential(System.String,System.String)">
+            <summary>
+            Verifies user credentials.
+            </summary>
+            <param name="email">The user's email.</param>
+            <param name="password">The user's password.</param>
+            <returns>User ID if credentials are valid.</returns>
+        </member>
+        <member name="M:auth.API.Controllers.LoginController.Login(System.String,System.String)">
+            <summary>
+            Logs in a user using their user ID and one-time password (OTP).
+            </summary>
+            <param name="userId">The user's ID.</param>
+            <param name="otp">The one-time password (OTP).</param>
+            <returns>The authentication token if login is successful.</returns>
+        </member>
+        <member name="M:auth.API.Controllers.LogoutController.Logout">
+            <summary>
+            Logs out the currently authenticated user.
+            </summary>
+            <returns>An HTTP status code indicating the success of the operation.</returns>
+        </member>
+        <member name="M:auth.API.Controllers.RecoveryController.SendEmailRecoveryPassword(System.String)">
+            <summary>
+            Sends an email for password recovery.
+            </summary>
+            <param name="userId">The user ID for which to send the recovery email.</param>
+            <returns>True if the recovery email was sent successfully, otherwise false.</returns>
+        </member>
+        <member name="M:auth.API.Controllers.RecoveryController.ChangePassword(System.String,System.String,System.String)">
+            <summary>
+            Changes the password for a user.
+            </summary>
+            <param name="userId">The user ID for which to change the password.</param>
+            <param name="newPassword">The new password to set.</param>
+            <param name="passwordToken">The token required for changing the password.</param>
+            <returns>An HTTP status code indicating the success of the operation.</returns>
+        </member>
+        <member name="M:auth.API.Controllers.RoleController.GetRoleByName(System.String,System.String)">
+            <summary>
+            Gets a role by its name.
+            </summary>
+            <param name="userId">The user ID for authorization.</param>
+            <param name="roleName">The name of the role to retrieve.</param>
+            <returns>The role information if found, otherwise returns a 403 Forbidden response.</returns>
+        </member>
+        <member name="M:auth.API.Controllers.RoleController.GetRoles(System.String)">
+            <summary>
+            Gets all roles.
+            </summary>
+            <param name="userId">The user ID for authorization.</param>
+            <returns>A list of all roles if the user is authorized, otherwise returns a 403 Forbidden response.</returns>
+        </member>
+        <member name="M:auth.API.Controllers.RoleController.AddRole(System.String,System.String)">
+            <summary>
+            Adds a new role.
+            </summary>
+            <param name="userId">The user ID for authorization.</param>
+            <param name="roleName">The name of the role to add.</param>
+            <returns>An HTTP status code indicating the success of the operation.</returns>
+        </member>
+        <member name="M:auth.API.Controllers.RoleController.UpdateRole(System.String,System.String,System.String)">
+            <summary>
+            Updates an existing role.
+            </summary>
+            <param name="userId">The user ID for authorization.</param>
+            <param name="roleName">The name of the role to update.</param>
+            <param name="newRole">The new role name.</param>
+            <returns>An HTTP status code indicating the success of the operation.</returns>
+        </member>
+        <member name="M:auth.API.Controllers.RoleController.DeleteRole(System.String,System.String)">
+            <summary>
+            Deletes a role.
+            </summary>
+            <param name="userId">The user ID for authorization.</param>
+            <param name="roleName">The name of the role to delete.</param>
+            <returns>An HTTP status code indicating the success of the operation.</returns>
+        </member>
+        <member name="M:auth.API.Controllers.SignupController.Signup(auth.Core.Models.Signup.Signup)">
+            <summary>
+            Registers a new user.
+            </summary>
+            <param name="request">The signup request containing user information.</param>
+            <returns>An HTTP status code indicating the success of the operation.</returns>
+        </member>
+        <member name="M:auth.API.Controllers.SignupController.ConfirmEmailAsync(System.String,System.String)">
+            <summary>
+            Confirms a user's email address.
+            </summary>
+            <param name="userId">The user ID.</param>
+            <param name="emailToken">The email confirmation token.</param>
+            <returns>An HTTP status code indicating the success of the operation.</returns>
+        </member>
+        <member name="M:auth.API.Controllers.UserInfoController.GetUserInfo(System.String)">
+            <summary>
+            Retrieves user information by user ID.
+            </summary>
+            <param name="id">The user ID.</param>
+            <returns>The user information if the user is authorized, otherwise returns a 403 Forbidden response.</returns>
+        </member>
+    </members>
+</doc>
