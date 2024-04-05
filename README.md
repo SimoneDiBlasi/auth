@@ -1,33 +1,120 @@
-# auth
+# Documentazione API di Autenticazione
 
- Le funzioni Encrypt e Decrypt si occupano della cifratura e decifratura dei dati utilizzando l'algoritmo AES (Advanced Encryption Standard). AES è un algoritmo di cifratura a blocchi molto diffuso e ampiamente utilizzato per proteggere dati sensibili.
+## Introduzione
+Questa documentazione descrive le operazioni disponibili tramite l'API di autenticazione. L'API consente agli utenti di registrarsi, accedere, recuperare la password, gestire i ruoli e ottenere informazioni personali.
 
-Ecco una spiegazione dettagliata di entrambe le funzioni:
+## Autenticazione
+Ogni richiesta all'API deve includere un header di autenticazione. Per autenticarsi, utilizzare un token valido ottenuto tramite login.
 
-Funzione Encrypt
-La funzione Encrypt prende in input una stringa di testo da cifrare e una chiave di crittografia, quindi esegue i seguenti passaggi:
+## Registrazione
+Per registrare un nuovo utente, inviare una richiesta POST al seguente endpoint:
+https://{url}/api/signup
 
-Creazione dell'oggetto AES: Viene creato un oggetto AES utilizzando Aes.Create(), che restituisce un'istanza di AES con le impostazioni predefinite.
 
-Impostazione della chiave e dell'IV: La chiave di crittografia e il vettore di inizializzazione (IV) vengono impostati sull'oggetto AES. In questo esempio, la chiave e l'IV vengono impostati in modo statico, ma in un'applicazione reale dovrebbero essere generati casualmente e in modo sicuro.
+### Parametri
+- `username` (string): L'username dell'utente.
+- `email` (string): L'email dell'utente.
+- `password` (string): La password dell'utente.
+- `confirmPassword` (string): La conferma della password dell'utente.
+- `phoneNumber` (string): Il numero di telefono dell'utente.
+- `address` (object):
+  - `street` (string): Indirizzo.
+  - `city` (string): Città.
+  - `state` (string): Stato.
+  - `postalCode` (string): Codice Postale.
+  - `country` (string): Paese.
+- `role` (int): Ruolo dell'utente (0: Admin, 1: SoftwareDeveloper, 2: MarketingManager, 3: UXDesigner, 4: Sales, 5: DataAnalyst).
+- `claims` (dictionary<string, string>): Altre informazioni.
 
-Creazione del cifratore: Viene creato un oggetto ICryptoTransform chiamato encryptor utilizzando CreateEncryptor(). Questo oggetto viene utilizzato per eseguire la trasformazione dei dati in input in dati crittografati.
+### Risposta
+Dopo una registrazione riuscita, verrà inviata una e-mail di conferma all'indirizzo fornito. L'utente deve confermare l'e-mail per poter procedere con il login.
 
-Crittografia dei dati: La stringa di testo in input viene convertita in un array di byte utilizzando l'encoding UTF-8 e quindi cifrata utilizzando il CryptoStream. Il risultato della crittografia viene convertito in una stringa Base64 per una facile rappresentazione.
+## Conferma E-mail
+Per confermare l'e-mail dopo la registrazione, l'utente deve fare clic sul link fornito nella e-mail di conferma.
 
-Restituzione del valore crittografato: La funzione restituisce la stringa crittografata.
+## Login
+Per effettuare il login, inviare una richiesta GET al seguente endpoint:
+https://{url}/api/login/validate-credential
 
-Funzione Decrypt
-La funzione Decrypt prende in input una stringa crittografata e una chiave di crittografia, quindi esegue i seguenti passaggi:
 
-Creazione dell'oggetto AES: Come nella funzione Encrypt, viene creato un oggetto AES.
+### Parametri
+- `email` (string): L'email dell'utente.
+- `password` (string): La password dell'utente.
 
-Impostazione della chiave e dell'IV: La chiave di crittografia e l'IV vengono impostati sull'oggetto AES.
+### Risposta
+Se le credenziali sono corrette e l'e-mail è stata confermata, verrà restituito un token di accesso.
 
-Creazione del decifratore: Viene creato un oggetto ICryptoTransform chiamato decryptor utilizzando CreateDecryptor(). Questo oggetto viene utilizzato per eseguire la trasformazione dei dati crittografati in dati originali.
+## Invio OTP
+Dopo il login, prima di accedere alle pagine protette, verrà inviato un OTP all'utente.
 
-Decrittografia dei dati: La stringa crittografata in input viene convertita da Base64 a un array di byte, quindi viene decifrata utilizzando il CryptoStream. Il risultato della decrittografia viene convertito in una stringa utilizzando l'encoding UTF-8.
+## Convalida OTP
+Per convalidare l'OTP ricevuto, inviare una richiesta POST al seguente endpoint:
+https://{url}/api/login/{otp}?userId={$userId}
 
-Restituzione del valore decrittografato: La funzione restituisce la stringa decrittografata.
 
-In sintesi, la funzione Encrypt cifra una stringa di testo utilizzando AES e la funzione Decrypt la decifra utilizzando la stessa chiave di crittografia. Questo permette di proteggere i dati sensibili durante la trasmissione o l'archiviazione, garantendo che solo chi possiede la chiave di crittografia possa accedere ai dati originali.
+### Parametri
+- `otp` (string): Il codice OTP ricevuto.
+- `userId` (string): L'ID dell'utente.
+
+### Risposta
+Se l'OTP è corretto, l'utente potrà procedere con l'accesso.
+
+## Recupero Password
+Per recuperare la password, inviare una richiesta POST al seguente endpoint:
+https://{url}/api/recovery/email-password?email={$email}
+
+
+### Parametri
+- `email` (string): L'email dell'utente.
+
+### Risposta
+Dopo il recupero della password, verrà inviata una e-mail con istruzioni per il cambio password.
+
+## Cambio Password
+Per cambiare la password, l'utente deve seguire le istruzioni ricevute via e-mail dopo il recupero password.
+
+## Gestione Ruoli (CRUD)
+Le operazioni di creazione, lettura, aggiornamento e cancellazione dei ruoli sono disponibili solo per gli utenti con ruolo di amministratore.
+
+### Creazione Ruolo
+https://{url}/api/role/{$roleName}
+
+### Lettura Ruolo
+https://{url}/api/role/{$roleName}
+
+### Aggiornamento Ruolo
+https://{url}/api/role/{$roleName}
+
+### Cancellazione Ruolo
+https://{url}/api/role/{$roleName}
+
+
+## Informazioni Utente
+Per ottenere le informazioni personali dell'utente, inviare una richiesta GET al seguente endpoint:
+https://{url}/api/userinfo/{$Id}
+
+
+### Parametri
+- `id` (string): L'ID dell'utente.
+
+### Risposta
+Verranno restituite le informazioni personali dell'utente autenticato.
+
+## Logout
+Per effettuare il logout, inviare una richiesta POST al seguente endpoint:
+https://{url}/api/logout
+
+
+### Risposta
+L'utente verrà disconnesso e il token di accesso verrà invalidato.
+
+## Errori
+In caso di errori, verranno restituiti i relativi codici di stato HTTP e messaggi di errore appropriati.
+
+## Limitazioni
+- Gli endpoint per la gestione dei ruoli sono disponibili solo per gli amministratori.
+- Le richieste di cambio password e recupero password richiedono l'invio di una e-mail di conferma per confermare l'identità dell'utente.
+
+Questa documentazione è soggetta a modifiche e aggiornamenti. Controllare regolarmente per eventuali aggiornamenti o modifiche.
+
+
